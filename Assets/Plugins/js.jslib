@@ -3,6 +3,9 @@ mergeInto(LibraryManager.library, {
   ShowVideo: function (videoID) {
 	ShowVideo(videoID);
   },
+   HideVideos: function () {
+	HideVideos();
+  },
 
   PrintFloatArray: function (array, size) {
     for(var i = 0; i < size; i++)

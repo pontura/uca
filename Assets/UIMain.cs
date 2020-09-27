@@ -9,6 +9,8 @@ public class UIMain : MonoBehaviour
 
     [DllImport("__Internal")]
     private static extern void ShowVideo(string str);
+    [DllImport("__Internal")]
+    private static extern void HideVideos();
 
     public Text debugField;
     public static UIMain Instance;
@@ -44,7 +46,11 @@ public class UIMain : MonoBehaviour
     }
     public void RotateBall(bool left)
     {
-        if(!left)
+        print("HideVideos ");
+#if !UNITY_EDITOR
+        HideVideos();
+#endif
+        if (!left)
             id++;
         else
             id--;
@@ -78,5 +84,12 @@ public class UIMain : MonoBehaviour
             }
             this.state = _state;
         }        
+    }
+    public void ActivateVideo()
+    {
+        print("ActivateVideo " + id.ToString());
+#if !UNITY_EDITOR
+        ShowVideo(id.ToString());
+#endif
     }
 }

@@ -8,7 +8,7 @@ public class UIMain : MonoBehaviour
 {
 
     [DllImport("__Internal")]
-    private static extern void ShowVideo(string str);
+    private static extern void ShowVideo(int id);
     [DllImport("__Internal")]
     private static extern void HideVideos();
 
@@ -32,7 +32,15 @@ public class UIMain : MonoBehaviour
         Instance = this;
         debugField.text = SystemInfo.graphicsDeviceType.ToString();
     }
-    public void ShowVideoByID(string videoID)
+    private void Start()
+    {
+        int rand = Random.Range(0, 10);
+        if (rand > 5)
+            RotateBall(true);
+        else
+            RotateBall(false);
+    }
+    public void ShowVideoByID(int videoID)
     {
         ShowVideo(videoID);
     }
@@ -89,7 +97,7 @@ public class UIMain : MonoBehaviour
     {
         print("ActivateVideo " + id.ToString());
 #if !UNITY_EDITOR
-        ShowVideo(id.ToString());
+        ShowVideo(id);
 #endif
     }
 }
